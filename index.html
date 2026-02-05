@@ -16,7 +16,7 @@
 }
 *{box-sizing:border-box;font-family:Montserrat,sans-serif;transition: all 0.3s ease}
 body{margin:0;background:var(--bg);color:#fff;scroll-behavior:smooth}
-header{display:flex;justify-content:flex-end;padding:20px 40px;color:#aaa;position:sticky;top:0;background:rgba(30,27,43,0.85);backdrop-filter:blur(10px);z-index:100;gap:20px}
+header{display:flex;justify-content:flex-end;padding:20px 40px;color:#aaa;position:sticky;top:0;background:rgba(30,27,43,0.85);backdrop-filter:blur(10px);z-index:100}
 header span{color:var(--accent);font-weight:700;cursor:pointer}
 header span:hover{text-shadow:0 0 8px var(--accent),0 0 20px var(--accent)}
 .user-avatar{display:inline-block;width:28px;height:28px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle;text-align:center;line-height:28px;font-weight:bold;color:#fff;font-size:14px;box-shadow:0 0 8px var(--accent)}
@@ -70,7 +70,6 @@ header span:hover{text-shadow:0 0 8px var(--accent),0 0 20px var(--accent)}
 
 <header>
   <div id="userBox">Guest · <span onclick="login()">CLICK TO LOGIN</span></div>
-  <div style="margin-left:auto;position:relative;cursor:pointer;" onclick="toggleCart()">🛒 Cart (<span id="cartCount">0</span>)</div>
 </header>
 
 <section class="hero">
@@ -120,6 +119,7 @@ header span:hover{text-shadow:0 0 8px var(--accent),0 0 20px var(--accent)}
   </div>
 </div>
 
+
 <!-- MAFIA -->
 <div id="mafia" class="dropdown">
   <div class="grid">
@@ -147,20 +147,19 @@ header span:hover{text-shadow:0 0 8px var(--accent),0 0 20px var(--accent)}
 <!-- CARS -->
 <div id="cars" class="dropdown">
   <div class="grid">
-    <div class="card"><img src="images/car1.png" alt="Custom car"><div class="rank-logo">Custom car</div><div class="price">5.99 EUR</div><button class="buy" onclick="openPayPal('SuperCar 1','5.99','images/car1.png')">BUY</button></div>
-    <div class="card"><img src="images/car2.png" alt="Custom дигане на км"><div class="rank-logo">Custom дигане на км</div><div class="price">2.99 EUR</div><button class="buy" onclick="openPayPal('SuperCar 2','2.99','images/car2.png')">BUY</button></div>
-    <div class="card"><img src="images/car3.png" alt="antilag"><div class="rank-logo">antilag</div><div class="price">1.99 EUR</div><button class="buy" onclick="openPayPal('SuperCar 3','29.99','images/car3.png')">BUY</button></div>
+    <div class="card"><img src="C:/Users/OWNERAA/Downloads/7e6784-2_11zon-removebg-preview.png" alt="Custom "><div class="rank-logo">Custom car</div><div class="price">5.99 EUR</div><button class="buy" onclick="openPayPal('Custom car 1','5.99','C:/Users/OWNERAA/Downloads/7e6784-2_11zon-removebg-preview.png')">BUY</button></div>
+    <div class="card"><img src="C:/Users/OWNERAA/Downloads/images__5_-removebg-preview.png" alt="Custom дигане"><div class="rank-logo">Custom дигане</div><div class="price">4.99 EUR</div><button class="buy" onclick="openPayPal('Custom дигане 2','4.99','C:/Users/OWNERAA/Downloads/images__5_-removebg-preview.png')">BUY</button></div>
+    <div class="card"><img src="" alt="тежест"><div class="rank-logo">тежест</div><div class="price">2.99 EUR</div><button class="buy" onclick="openPayPal('тежест','2.99','images/car3.png')">BUY</button></div>
   </div>
 </div>
 
-<!-- CART MODAL -->
-<div class="modal" id="cartModal">
+<!-- PAYPAL MODAL -->
+<div class="modal" id="paypalModal">
   <div class="modal-box">
-    <h2>Shopping Cart</h2>
-    <div id="cartItems" style="max-height:200px;overflow-y:auto;margin-bottom:15px;"></div>
-    <div><strong>Total: €<span id="cartTotal">0.00</span></strong></div>
-    <button onclick="checkout()">Checkout</button>
-    <p onclick="closeCart()">Close</p>
+    <h2 id="paypalTitle">Buy</h2>
+    <img id="paypalImage" src="" alt="Product">
+    <a id="paypalButton" href="#" target="_blank"><button>Плати с PayPal</button></a>
+    <p onclick="closePayPal()">Затвори</p>
   </div>
 </div>
 
@@ -174,20 +173,13 @@ header span:hover{text-shadow:0 0 8px var(--accent),0 0 20px var(--accent)}
   </div>
 </div>
 
-<div class="footer-panel">
-  Всички дадени пари не се връщат и се дават за сървара.<br>Когато купиш нещо отвори тикет и прати транзакция в Discord Server.
-  <div class="footer-buttons">
-    <a href="#">Terms & Conditions</a>
-    <a href="#">Privacy Policy</a>
-  </div>
-</div>
+<div class="footer-panel">Пожелаваме приятна игра и да не забравите че<br>Всички дадени пари не се връщат и се дават за сървара а не за други неща.<br><br> Когато купиш нещо отвори тикет и прати транзакция и ще ти се отговори за по-малко от 15-20 минути <a href="#">Discord Server</a>. <div class="footer-buttons"> <a href="#">Terms & Conditions</a> <a href="#">Privacy Policy</a> </div> </div>
 
 <div class="copyright">
   © DarkNightRP 2026 · Not affiliated with Mojang AB
 </div>
 
 <script>
-/* DROPDOWN */
 function toggleDropdown(id){
   const el=document.getElementById(id);
   document.querySelectorAll('.dropdown').forEach(d=>{if(d!==el)d.classList.remove('active');});
@@ -197,7 +189,7 @@ function toggleDropdown(id){
 /* LOGIN */
 const userBox=document.getElementById("userBox");
 const loginModal=document.getElementById("loginModal");
-const cartModal=document.getElementById("cartModal");
+const paypalModal=document.getElementById("paypalModal");
 
 function renderUser(){
   const username=localStorage.getItem("username");
@@ -208,44 +200,20 @@ function renderUser(){
 }
 function login(){loginModal.classList.add("active");}
 function closeLogin(){loginModal.classList.remove("active");}
-function doLogin(){
-  const n=document.getElementById("usernameInput").value.trim(); 
-  if(n.length<2){alert("Username must be at least 2 characters");return;}
-  localStorage.setItem("username",n); renderUser(); closeLogin();
-}
+function doLogin(){const n=document.getElementById("usernameInput").value.trim(); if(n.length<2){alert("Username must be at least 2 characters");return;} localStorage.setItem("username",n); renderUser(); closeLogin();}
 loginModal.addEventListener("click", e=>{if(e.target===loginModal)closeLogin();});
 function logout(){localStorage.removeItem("username"); renderUser();}
 renderUser();
 
-/* CART */
-let cart=[];
-function addToCart(name, price){
-  cart.push({name, price: parseFloat(price)});
-  document.getElementById('cartCount').innerText = cart.length;
-  renderCart();
+/* PAYPAL */
+function openPayPal(product,price,img){
+  document.getElementById("paypalTitle").innerText=`Buy ${product} - €${price}`;
+  document.getElementById("paypalImage").src=img;
+  document.getElementById("paypalButton").href=`https://www.paypal.com/paypalme/YOURUSERNAME/${price}`;
+  paypalModal.classList.add("active");
 }
-function toggleCart(){cartModal.classList.toggle('active'); renderCart();}
-function closeCart(){cartModal.classList.remove('active');}
-function renderCart(){
-  const container=document.getElementById('cartItems');
-  container.innerHTML='';
-  let total=0;
-  cart.forEach(item=>{
-    total+=item.price;
-    const div=document.createElement('div');
-    div.style.display='flex';
-    div.style.justifyContent='space-between';
-    div.style.marginBottom='5px';
-    div.innerHTML=`<span>${item.name}</span> <span>€${item.price.toFixed(2)}</span>`;
-    container.appendChild(div);
-  });
-  document.getElementById('cartTotal').innerText=total.toFixed(2);
-}
-function checkout(){
-  if(cart.length===0){alert("Cart is empty!"); return;}
-  alert("Checkout successful!\nTotal: €"+document.getElementById('cartTotal').innerText);
-  cart=[]; document.getElementById('cartCount').innerText='0'; renderCart(); closeCart();
-}
+function closePayPal(){paypalModal.classList.remove("active");}
+paypalModal.addEventListener("click", e=>{if(e.target===paypalModal)closePayPal();});
 </script>
 
 </body>
